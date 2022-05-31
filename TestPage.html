@@ -1,0 +1,101 @@
+<html>
+	<head>
+		<title>CSharp Test Page</title>
+	</head>
+	<body>
+		<script type="text/csharp">
+			#region Binding Models
+
+			public class PageModel
+			{
+				public string Message { get; set; }
+				public int PrimeLimit { get; set; }
+				public string PrimeNumbers { get; set; }
+			}
+
+			public class TimerModel
+			{
+				public DateTimeOffset Now { get; set; }
+			}
+
+			#endregion
+
+			#region Event Handlers
+
+			public static PageModel OnInit(string message = "Only few of mere mortals may try to enter the twilight zone", int limit = 7777)
+			{
+				return new PageModel()
+				{ 
+					Message = message,
+					PrimeLimit = limit,
+					PrimeNumbers = GetPrimes(limit),
+				};
+			}
+
+			public static TimerModel OnEverySecond()
+			{
+				return new TimerModel()
+				{
+					Now = DateTimeOffset.Now
+				};
+			}
+
+			#endregion
+
+			#region Private Methods
+
+			private static string GetPrimes(int limit)
+			{
+				var sb = new StringBuilder();
+				for (int i = 0; i <= limit ; i++)
+				{
+					if (IsPrime(i))
+					{
+						sb.Append(i);
+						sb.Append(" ");
+					}
+				}
+				return sb.ToString().Trim();
+			}
+
+			private static bool IsPrime(int number)
+			{
+				if (number <= 1) return false;
+				if (number == 2) return true;
+				if (number % 2 == 0) return false;
+
+				var boundary = (int)Math.Floor(Math.Sqrt(number));
+
+				for (int i = 3; i <= boundary; i += 2)
+				{
+					if (number % i == 0)
+					{
+						return false;
+					}
+				}
+
+				return true;        
+			}
+
+			#endregion
+		</script>
+		<h3><label>Because "Hello World" is for babies:</label></h3>
+		<div>
+			${ message }
+		</div>
+		<hr />
+		<h3><label>Let's do some primes up to the specified limit: ${ primeLimit }</label></h3>
+		<div>
+			${ primeNumbers }
+		</div>
+		<hr />
+		<h3><label>This is based on a one second timer and should add new timestamp every second:</label></h3>
+		<div>
+			${ now }
+		</div>
+		<hr />
+		<h4><label>TODO: Support for Async, HttpClient, System.IO other other goodies to be added in near future along with more hooks to handle various events.</label></h4>
+		<h4><label>Disclaimer: THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND. Keep in mind this was a weekend PoC project without proper DOM manipulation or input bindings as far as C# scripting is concerned. Not ready to be released into the wild not even by a long shot.</label></h4>
+		<h5><label>Sharpium C# scripting enabled browser by Ivan Sedlak, 2022. Based on CefSharp using Chromium engine.</label></h5>
+	</body>
+</html>

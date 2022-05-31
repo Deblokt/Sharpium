@@ -1,31 +1,11 @@
-# CefSharp.MinimalExample
+# Sharpium
 
-Minimal example of how the CefSharp library can be used using the official `Nuget` packages
-- .NET Framework solution (`CefSharp.MinimalExample.sln`)
-- .NET Core solution (`CefSharp.MinimalExample.netcore.sln`). 
+## Sharpium C# scripting enabled web browser based on CefSharp using Chromium engine.
+Keep in mind this was a weekend PoC project without proper DOM manipulation or input bindings as far as C# scripting is concerned. Not ready to be released into the wild not even by a long shot.
 
-Includes examples for
-- WinForms
-- WPF
-- OffScreen
- 
-For a more complete example of each project see the main `CefSharp` repository.
+__Disclaimer: THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.__
 
-## .NET Core support
+## Usage
+Enter any URL in the address bar and press ENTER to load it. In order to test out the C# scripting capabilities you can load the included [__TestPage.html__](https://github.com/Deblokt/Sharpium/blob/master/TestPage.html) containing the C# script. Html document can be loaded from a file system like so __file:///C:/Users/abc/Source/Repos/Sharpium/TestPage.html__ (modify the path to file to suit your folder structure and enter it in the address bar).
 
-For `.Net Core 3.1/Net 5` the following packages are now on Nuget.org
-- https://www.nuget.org/packages/CefSharp.WinForms.NETCore
-- https://www.nuget.org/packages/CefSharp.Wpf.NETCore
-- https://www.nuget.org/packages/CefSharp.OffScreen.NETCore
-- Publish Example
-  - x86: `dotnet publish -f netcoreapp3.1 -r win-x86
-  - x64: `dotnet publish -f netcoreapp3.1 -r win-x64
-
-It is possible to publish the application as single EXE file by adding `-p:PublishSingleFile=true`.
-
-Any problems please report them on https://github.com/cefsharp/CefSharp/issues/3197
-
-## .NET 5 Support
-
-The same packages listed above in the .Net Core section should be used for .Net 5.0
 
